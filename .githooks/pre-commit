@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ ! -x ".venv/bin/pre-commit" ]; then
+  echo "[pre-commit] pre-commit が未セットアップです。まず 'make init' を実行してください。" 1>&2
+  exit 1
+fi
+
+.venv/bin/pre-commit run --hook-stage commit --all-files
+
