@@ -1,0 +1,55 @@
+name: 不具合報告
+description: 想定外の挙動 / リグレッション
+title: "[不具合] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        再現可能な不具合の報告テンプレートです。セキュリティに関わる可能性がある場合は、このプロジェクトの `SECURITY.md` に記載された窓口へ連絡してください。
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: 概要
+      description: 何が起きているかを簡潔に書いてください
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待する挙動
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実際の挙動
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: できるだけ具体的に。最小手順が理想です。
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境情報
+      description: OS / バージョン / 実行環境など
+      placeholder: |
+        - OS:
+        - Version:
+        - Notes:
+    validations:
+      required: false

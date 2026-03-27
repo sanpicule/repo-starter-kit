@@ -1,21 +1,31 @@
-# Contributing to repo-starter-kit
+# repo-starter-kit へのコントリビュート
 
-Thank you for considering contributing to the **repo-starter-kit**! We're excited to have you on board. Below are some general contribution guidelines and branch naming format rules.
+**repo-starter-kit** へのコントリビュートを検討していただきありがとうございます。  
+このリポジトリは「新しいアプリケーション/サービス用リポジトリを作るためのスターターテンプレート」です。  
+ここでは、テンプレート自体に変更を加えるときの貢献フローと、ブランチ命名ルールをまとめます。
 
-## General Contribution Guidelines
-1. **Fork the Repository**: Start by forking the repository to your personal GitHub account.
-2. **Use Pull Requests**: Submit your contributions via a pull request. Ensure that the pull request description explains the changes you've made.
-3. **Keep it Clean**: Make sure your code is clean and well-documented. Follow existing style conventions.
-4. **Testing**: If applicable, please include tests for your changes.
+## 基本方針
+- **Pull Request（PR）経由**で変更を取り込みます
+- 変更の意図が伝わるように、**説明と最小差分**を心がけてください
+- ワークフローやテンプレの挙動に影響がある場合は、**README / docs の更新**も含めてください
 
-## Branch Naming Format
-- When creating a new branch for your contribution, use the following naming format:  `type/description`.
-- **Type**: This should indicate the nature of your changes, such as `feature`, `bugfix`, or `chore`.
-- **Description**: A brief description of your changes, written in kebab-case (all lowercase with dashes between words).
+## 変更の流れ（推奨）
+1. リポジトリを Fork（必要な場合）
+2. ブランチを作成（命名ルールは下記）
+3. ローカルでチェックを実行
+   - 初回: `make init`
+   - 実行: `make check`（= `pre-commit run --all-files`）
+4. PR を作成し、テンプレートの各項目（概要/変更内容/テスト計画）を埋める
 
-### Examples:
+## ブランチ命名ルール
+新しいブランチは次の形式にしてください: `type/description`
+
+- **type**: 変更の種類（例: `feature`, `bugfix`, `chore`）
+- **description**: 変更内容の短い説明（kebab-case: 小文字 + ハイフン区切り）
+
+### 例
 - `feature/add-user-authentication`
 - `bugfix/fix-login-error`
 - `chore/update-dependencies`
 
-By following these guidelines, you help us maintain a standard that makes collaboration easier for everyone. Thank you for contributing!
+このルールにより、レビューや履歴追跡がしやすくなります。ご協力ありがとうございます。
