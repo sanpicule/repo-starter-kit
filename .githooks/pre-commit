@@ -7,4 +7,3 @@ if [ ! -x ".venv/bin/pre-commit" ]; then
 fi
 
 .venv/bin/pre-commit run --hook-stage commit --all-files
-
