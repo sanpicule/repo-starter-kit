@@ -1,0 +1,18 @@
+{
+  // プロジェクト名はリポジトリに合わせて変更してください
+  "name": "<PROJECT_NAME>",
+  "image": "mcr.microsoft.com/devcontainers/base:debian",
+  "features": {
+    // ホストの Docker デーモンをコンテナ内から利用（make init / make check が使えるようになる）
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  // コンテナ初回起動時に自動で pre-commit 環境をセットアップ
+  "postCreateCommand": "make init",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "EditorConfig.EditorConfig"
+      ]
+    }
+  }
+}

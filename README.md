@@ -29,6 +29,7 @@
 - **共通設定**: `.editorconfig`, `.gitignore`
 - **自動チェック（言語非依存）**: `pre-commit`（末尾空白、改行、YAML、巨大ファイル、マージ競合など）
 - **CI**: GitHub Actions で Docker 経由の `pre-commit` を実行（ローカルと同じ考え方）
+- **Dev Container**: `.devcontainer/devcontainer.json`（VSCode でコンテナを開くと `make init` が自動実行）
 - **AIエージェント指示**: Cursor / GitHub Copilot / Claude Code 向け
 
 ## pre-commit.ci（自動修正コミット）

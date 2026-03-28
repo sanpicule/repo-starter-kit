@@ -9,7 +9,10 @@
 
 ## ローカルチェック
 - `make init` で Docker により pre-commit 用イメージをビルドし、Git フックを有効化します（ローカルに Python は不要）。
-- `make check` で Docker 内で `pre-commit run --all-files` を実行します。
+- `make check` で Docker 内で `pre-commit run --all-files` を実行します（キャッシュボリューム使用）。
+- `make lint` は `make check` のエイリアスです。
+- `make test` / `make run` は各プロジェクトで実装するスタブです。
+- `make clean` で Docker イメージ・キャッシュボリュームを削除します。
 
 ## プレースホルダ
 スターターテンプレートから生成された直後のプロジェクトでは、次のようなプレースホルダが残っていることがあります。

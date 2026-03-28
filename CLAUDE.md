@@ -17,7 +17,11 @@
 ## ローカルコマンド（推奨）
 
 - `make init` : Docker で pre-commit 用イメージをビルドし、Git フックを有効化（ローカルに Python は不要）
-- `make check` : Docker 内で `pre-commit run --all-files` を実行
+- `make check` : Docker 内で `pre-commit run --all-files` を実行（キャッシュボリューム使用）
+- `make lint`  : `make check` のエイリアス
+- `make test`  : テスト実行スタブ（各プロジェクトで実装）
+- `make run`   : 起動スタブ（各プロジェクトで実装）
+- `make clean` : Docker イメージ・キャッシュボリュームを削除
 
 ## プレースホルダの扱い
 
