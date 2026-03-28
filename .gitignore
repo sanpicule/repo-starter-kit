@@ -35,3 +35,6 @@ Temporary Items
 # OS / tooling
 *.swp
 *.swo
+
+# 旧ローカル環境（venv で pre-commit していた場合の残骸）
+.venv/

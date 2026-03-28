@@ -13,8 +13,8 @@
 1. リポジトリを Fork（必要な場合）
 2. ブランチを作成（命名ルールは下記）
 3. ローカルでチェックを実行
-   - 初回: `make init`
-   - 実行: `make check`（= `pre-commit run --all-files`）
+   - 初回: `make init`（Docker で pre-commit 用イメージをビルドし、Git フックを有効化）
+   - 実行: `make check`（Docker 内で `pre-commit run --all-files`）
 4. PR を作成し、テンプレートの各項目（概要/変更内容/テスト計画）を埋める
 
 ## 自動修正について（pre-commit.ci）

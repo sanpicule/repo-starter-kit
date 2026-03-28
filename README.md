@@ -13,19 +13,22 @@
 ### 1. GitHubでテンプレとして使う（推奨）
 - GitHubのテンプレート機能（画面上の `Use this template`）で新規リポジトリを作成
 - 生成されたリポジトリ側で、このREADME内のプレースホルダを置換（下記参照）
-- `make init` でローカルチェックを有効化（コミット時に必ず pre-commit が実行されるように設定します）
-  - `pre-commit` を使うために **Python 3 が必要**です（アプリ本体の言語とは別の「開発ツール用の依存」です）
+- `make init` でローカルチェックを有効化（Docker で pre-commit 用イメージをビルドし、コミット時に必ず pre-commit が走るよう Git フックを設定します）
+  - **Docker が必要**です（`pre-commit` はコンテナ内の Python で動きます。アプリ本体が Python である必要はありません）
+
+> **具体的な手順（Todoアプリを例に）**: リポジトリ作成からアプリコード追加まで、ステップごとに解説しています。
+> → [`docs/EXAMPLE_TODO_APP.md`](docs/EXAMPLE_TODO_APP.md)
 
 ### 2. 既存リポジトリに導入する
 - 必要なファイルだけをコピー（`LICENSE` 等は方針に応じて調整）
-- `pre-commit` を導入し、CIで `pre-commit run --all-files` を回す
+- `docker/pre-commit/Dockerfile` と `Makefile` を使い、CI と同様に Docker 経由で `pre-commit run --all-files` を回す
 
 ## 含まれるもの（新規リポジトリに入る共通セット）
 - **共通ドキュメント**: `CONTRIBUTING.md`, `SECURITY.md`, `LICENSE`
 - **GitHubテンプレ**: Issue/PR テンプレート
 - **共通設定**: `.editorconfig`, `.gitignore`
 - **自動チェック（言語非依存）**: `pre-commit`（末尾空白、改行、YAML、巨大ファイル、マージ競合など）
-- **CI**: GitHub Actionsで `pre-commit` を実行
+- **CI**: GitHub Actions で Docker 経由の `pre-commit` を実行（ローカルと同じ考え方）
 - **AIエージェント指示**: Cursor / GitHub Copilot / Claude Code 向け
 
 ## pre-commit.ci（自動修正コミット）
@@ -44,6 +47,10 @@
 - `<PROJECT_NAME>`: リポジトリ/プロジェクト名
 - `<PROJECT_DESCRIPTION>`: 短い説明
 - `<SECURITY_CONTACT>`: 脆弱性報告先（メール/フォーム/窓口）
+
+## 開発ツールとアプリの言語について
+- `pre-commit` は **Docker イメージ**（`docker/pre-commit/Dockerfile`）の中で実行されます。
+- これは「品質チェック用の実行環境」を揃えるためのもので、**ToDoアプリが Node / Go / Rust など何で書かれていても問題ありません**。
 
 ## ディレクトリ方針
 詳細は `docs/PROJECT_STRUCTURE.md` を参照してください。
