@@ -7,9 +7,9 @@
 - `docker/pre-commit/`: 開発ツール（pre-commit）用の Docker 定義（アプリケーションの言語とは無関係）
 - `.devcontainer/`: VSCode Dev Container 設定（`postCreateCommand` で `make init` を自動実行）
 - `docs/`: 仕様、設計、運用手順、ADR（意思決定ログ）など
-- `.github/`: Issue/PRテンプレ、GitHub Actions ワークフロー、Copilot 向け指示
+- `.github/`: Issue/PR テンプレ、GitHub Actions ワークフロー
 - `.githooks/`: Git フック（`make init` で `core.hooksPath` として有効化）
-- `.cursor/rules/`: Cursor 向けプロジェクトルール
+- `AGENTS.md`: AIエージェント（Claude Code / Copilot / Cursor など）向けの汎用プロジェクト指示
 
 ## 追加推奨（必要に応じて作成）
 

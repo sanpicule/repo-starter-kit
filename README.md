@@ -34,7 +34,7 @@
 | pre-commit 実行環境 | `docker/pre-commit/Dockerfile`, `Makefile`, `.githooks/pre-commit` | Docker 経由で pre-commit を実行（ローカル Python 不要） |
 | CI | `.github/workflows/ci.yml` | GitHub Actions で Docker 経由の `pre-commit` を実行（GHA キャッシュ活用） |
 | Dev Container | `.devcontainer/devcontainer.json` | VSCode でコンテナを開くと `make init` が自動実行 |
-| AIエージェント指示 | `CLAUDE.md`, `.github/copilot-instructions.md`, `.cursor/rules/00-project.md` | Claude Code / GitHub Copilot / Cursor 向けプロジェクトルール |
+| AIエージェント指示 | `AGENTS.md` | [agents.md](https://agents.md/) 準拠の汎用エージェント向けプロジェクトルール（Claude Code / Copilot / Cursor / Aider / Codex など共通） |
 | ドキュメント | `docs/PROJECT_STRUCTURE.md`, `docs/EXAMPLE_TODO_APP.md`, `docs/SETUP_CHECKS.md` | 構成ガイド・Todoアプリ例・生成直後のチェック項目 |
 
 ## pre-commit.ci（自動修正コミット）
