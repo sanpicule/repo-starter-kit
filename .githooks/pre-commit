@@ -1,13 +1,16 @@
 #!/usr/bin/env sh
 set -eu
 
-IMAGE="${PRE_COMMIT_IMAGE:-repo-starter-kit-pre-commit}"
 ROOT="$(git rev-parse --show-toplevel)"
+PROJECT_SLUG="$(basename "$ROOT")"
+IMAGE="${PRE_COMMIT_IMAGE:-${PROJECT_SLUG}-pre-commit}"
 
 if ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
-  echo "[pre-commit] Docker イメージが未ビルドです。まず 'make init' を実行してください。" 1>&2
+  echo "[pre-commit] Docker イメージ ($IMAGE) が未ビルドです。まず 'make init' を実行してください。" 1>&2
   exit 1
 fi
 
+# デフォルトはステージ済みファイルのみを対象にする（高速）。
+# 全ファイルを対象にしたい場合は `make check` を実行してください。
 exec docker run --rm -v "$ROOT:/workspace" -w /workspace "$IMAGE" \
-  pre-commit run --hook-stage commit --all-files
+  pre-commit run --hook-stage pre-commit

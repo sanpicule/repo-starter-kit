@@ -5,7 +5,7 @@
 -
 
 ## テスト計画
-- [ ] ローカルで `pre-commit run --all-files` を実行
+- [ ] ローカルで `make check`（または `pre-commit run --all-files`）を実行
 - [ ] 影響箇所の手動確認
 
 ## チェックリスト

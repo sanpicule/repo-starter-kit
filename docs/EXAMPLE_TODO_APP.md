@@ -50,16 +50,22 @@ cd todo-app
 | プレースホルダ | 置換例 |
 |---|---|
 | `<PROJECT_NAME>` | `todo-app` |
-| `<PROJECT_DESCRIPTION>` | `シンプルなTodoアプリ` |
 | `<SECURITY_CONTACT>` | `security@example.com` |
 
 ```bash
-# macOS の場合
-find . -type f \( -name "*.md" \) \
+# macOS（BSD sed）の場合
+find . -type f \( -name "*.md" -o -name "*.json" \) \
   -not -path "./.git/*" \
   -exec sed -i '' \
     -e 's/<PROJECT_NAME>/todo-app/g' \
-    -e 's/<PROJECT_DESCRIPTION>/シンプルなTodoアプリ/g' \
+    -e 's/<SECURITY_CONTACT>/security@example.com/g' \
+    {} +
+
+# Linux（GNU sed）の場合
+find . -type f \( -name "*.md" -o -name "*.json" \) \
+  -not -path "./.git/*" \
+  -exec sed -i \
+    -e 's/<PROJECT_NAME>/todo-app/g' \
     -e 's/<SECURITY_CONTACT>/security@example.com/g' \
     {} +
 ```

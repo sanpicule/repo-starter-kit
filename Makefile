@@ -1,7 +1,12 @@
 # pre-commit は Docker 内で実行（ローカルに Python は不要）
-PRE_COMMIT_IMAGE ?= repo-starter-kit-pre-commit
-PRE_COMMIT_CACHE ?= repo-starter-kit-pre-commit-cache
+# イメージ名・キャッシュ名はリポジトリ名（カレントディレクトリ名）から導出し、
+# 複数プロジェクトを同一ホストで扱うときの衝突を避ける。
+PROJECT_SLUG ?= $(notdir $(CURDIR))
+PRE_COMMIT_IMAGE ?= $(PROJECT_SLUG)-pre-commit
+PRE_COMMIT_CACHE ?= $(PROJECT_SLUG)-pre-commit-cache
 DOCKERFILE := docker/pre-commit/Dockerfile
+
+export PRE_COMMIT_IMAGE
 
 .PHONY: init check lint test run clean
 

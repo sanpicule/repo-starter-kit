@@ -24,13 +24,18 @@
 - `docker/pre-commit/Dockerfile` と `Makefile` を使い、CI と同様に Docker 経由で `pre-commit run --all-files` を回す
 
 ## 含まれるもの（新規リポジトリに入る共通セット）
-- **共通ドキュメント**: `CONTRIBUTING.md`, `SECURITY.md`, `LICENSE`
-- **GitHubテンプレ**: Issue/PR テンプレート
-- **共通設定**: `.editorconfig`, `.gitignore`
-- **自動チェック（言語非依存）**: `pre-commit`（末尾空白、改行、YAML、巨大ファイル、マージ競合など）
-- **CI**: GitHub Actions で Docker 経由の `pre-commit` を実行（ローカルと同じ考え方）
-- **Dev Container**: `.devcontainer/devcontainer.json`（VSCode でコンテナを開くと `make init` が自動実行）
-- **AIエージェント指示**: Cursor / GitHub Copilot / Claude Code 向け
+
+| 種別 | ファイル / パス | 内容 |
+|---|---|---|
+| 共通ドキュメント | `README.md`, `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, `LICENSE`, `LICENSE.ja` | 運用の型・ライセンス（日本語訳含む） |
+| GitHub テンプレ | `.github/ISSUE_TEMPLATE/` (`bug_report.yml`, `feature_request.yml`, `config.yml`), `.github/pull_request_template.md` | Issue / PR テンプレ（`config.yml` で空 Issue を無効化） |
+| 共通設定 | `.editorconfig`, `.gitignore`, `.dockerignore` | エディタ・Git・Docker の基本設定 |
+| 自動チェック（言語非依存） | `.pre-commit-config.yaml`, `.pre-commit-ci.yaml` | 末尾空白、改行、YAML、巨大ファイル、マージ競合など |
+| pre-commit 実行環境 | `docker/pre-commit/Dockerfile`, `Makefile`, `.githooks/pre-commit` | Docker 経由で pre-commit を実行（ローカル Python 不要） |
+| CI | `.github/workflows/ci.yml` | GitHub Actions で Docker 経由の `pre-commit` を実行（GHA キャッシュ活用） |
+| Dev Container | `.devcontainer/devcontainer.json` | VSCode でコンテナを開くと `make init` が自動実行 |
+| AIエージェント指示 | `CLAUDE.md`, `.github/copilot-instructions.md`, `.cursor/rules/00-project.md` | Claude Code / GitHub Copilot / Cursor 向けプロジェクトルール |
+| ドキュメント | `docs/PROJECT_STRUCTURE.md`, `docs/EXAMPLE_TODO_APP.md`, `docs/SETUP_CHECKS.md` | 構成ガイド・Todoアプリ例・生成直後のチェック項目 |
 
 ## pre-commit.ci（自動修正コミット）
 `pre-commit` のフックが「修正可能な問題（末尾空白、末尾改行など）」を直した場合、通常のCIではその修正をコミットできず失敗します。
@@ -45,9 +50,19 @@
 ## プレースホルダ（置換推奨）
 このテンプレには、差し替え前提のプレースホルダが含まれます。
 
-- `<PROJECT_NAME>`: リポジトリ/プロジェクト名
-- `<PROJECT_DESCRIPTION>`: 短い説明
-- `<SECURITY_CONTACT>`: 脆弱性報告先（メール/フォーム/窓口）
+- `<PROJECT_NAME>`: リポジトリ/プロジェクト名（`.devcontainer/devcontainer.json` 等）
+- `<SECURITY_CONTACT>`: 脆弱性報告先（メール/フォーム/窓口）（`SECURITY.md`）
+
+また、以下は「プレースホルダ文字列」ではありませんが、テンプレから生成した直後に**手動で更新が必要**です。
+
+- `LICENSE` / `LICENSE.ja`: 著作権年（`YYYY`）と著作権者名
+- `README.md` / `CONTRIBUTING.md`: テンプレ説明文 → プロジェクト固有の内容へ書き換え
+
+プレースホルダの検索は次のコマンドでできます。
+
+```bash
+grep -rIn --exclude-dir=.git -E '<(PROJECT_NAME|SECURITY_CONTACT)>' .
+```
 
 ## 開発ツールとアプリの言語について
 - `pre-commit` は **Docker イメージ**（`docker/pre-commit/Dockerfile`）の中で実行されます。
@@ -57,4 +72,5 @@
 詳細は `docs/PROJECT_STRUCTURE.md` を参照してください。
 
 ## ライセンス
-MITライセンス（`LICENSE` を参照）
+MITライセンス。正本は [`LICENSE`](LICENSE)、参考訳として [`LICENSE.ja`](LICENSE.ja) を同梱しています
+（法的効力は `LICENSE` のみ）。

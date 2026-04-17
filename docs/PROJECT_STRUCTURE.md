@@ -2,19 +2,26 @@
 
 このリポジトリは「言語非依存のスターター」です。プロジェクト固有のコード構成は自由ですが、運用・ドキュメント・自動化は共通化するのを推奨します。
 
-## 推奨ディレクトリ
+## 同梱ディレクトリ・ファイル
 
 - `docker/pre-commit/`: 開発ツール（pre-commit）用の Docker 定義（アプリケーションの言語とは無関係）
 - `.devcontainer/`: VSCode Dev Container 設定（`postCreateCommand` で `make init` を自動実行）
 - `docs/`: 仕様、設計、運用手順、ADR（意思決定ログ）など
+- `.github/`: Issue/PRテンプレ、GitHub Actions ワークフロー、Copilot 向け指示
+- `.githooks/`: Git フック（`make init` で `core.hooksPath` として有効化）
+- `.cursor/rules/`: Cursor 向けプロジェクトルール
+
+## 追加推奨（必要に応じて作成）
+
 - `scripts/`: 言語に依存しない運用スクリプト（例: リリース手順補助、整形、チェック）
-- `.github/`: Issue/PRテンプレ、ワークフロー、CODEOWNERS等
+- `.github/CODEOWNERS`: 自動レビュー担当割り当て（プロジェクトで必要になれば追加）
 
 ## ドキュメントの最低ライン（推奨）
 
 - `README.md`: 目的、使い方、開発/運用の入口
 - `CONTRIBUTING.md`: 変更の作法（PR、ブランチ、レビュー、ローカルチェック）
 - `SECURITY.md`: 脆弱性報告窓口
+- `CODE_OF_CONDUCT.md`: コミュニティ行動規範（同梱済み）
 
 ## 自動化の最低ライン（推奨）
 

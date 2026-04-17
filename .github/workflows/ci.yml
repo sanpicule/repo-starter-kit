@@ -9,8 +9,31 @@ jobs:
       - name: チェックアウト
         uses: actions/checkout@v4
 
-      - name: pre-commit 用 Docker イメージをビルド
-        run: docker build -t repo-starter-kit-pre-commit -f docker/pre-commit/Dockerfile .
+      - name: Docker Buildx をセットアップ
+        uses: docker/setup-buildx-action@v3
+
+      - name: pre-commit 用 Docker イメージをビルド（GHA キャッシュ活用）
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/pre-commit/Dockerfile
+          load: true
+          tags: repo-starter-kit-pre-commit:ci
+          cache-from: type=gha,scope=pre-commit
+          cache-to: type=gha,mode=max,scope=pre-commit
+
+      - name: pre-commit キャッシュを復元
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: ${{ runner.os }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pre-commit-
 
       - name: pre-commit 実行（Docker 内）
-        run: docker run --rm -v "$GITHUB_WORKSPACE:/workspace" -w /workspace repo-starter-kit-pre-commit pre-commit run --all-files
+        run: |
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -v "$HOME/.cache/pre-commit:/root/.cache/pre-commit" \
+            -w /workspace \
+            repo-starter-kit-pre-commit:ci pre-commit run --all-files
